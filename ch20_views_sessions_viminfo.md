@@ -10,7 +10,7 @@
 
 我们来创建一个 `foo.txt` 文件：
 
-```
+```text
 foo1
 foo2
 foo3
@@ -31,7 +31,7 @@ foo10
 
 您的文件看起来应该像：
 
-```
+```text
 +-- 5 lines: foo1 -----
 foo6
 foo7
@@ -44,25 +44,25 @@ foo10
 
 运行：
 
-```
+```text
 :set viewoptions?
 ```
 
 默认情况下会显示（根据您的 vimrc 可能会有所不同）：
 
-```
+```text
 viewoptions=folds,cursor,curdir
 ```
 
 我们来配置 `viewoptions`。要保留的三个属性分别是折叠、映射和本地设置选项。如果您的设置和我的相似，那么您已经有了 `folds` 选项。运行下列命令使视图记住 `localoptions`：
 
-```
+```text
 :set viewoptions+=localoptions
 ```
 
 查阅 `:h viewoptions` 可了解 `viewoptions` 的其他可用选项。现在运行 `:set viewoptions?`，您将看到：
 
-```
+```text
 viewoptions=folds,cursor,curdir,localoptions
 ```
 
@@ -70,7 +70,7 @@ viewoptions=folds,cursor,curdir,localoptions
 
 在 `foo.txt` 窗口经过适当折叠并设置了 `nonumber norelativenumber` 选项后，现在我们来保存视图。运行：
 
-```
+```text
 :mkview
 ```
 
@@ -80,13 +80,13 @@ Vim 创建了一个视图文件。
 
 您可能会想“Vim 将这个视图文件保存到哪儿了呢？”，运行下列命令就可以看到答案了：
 
-```
+```text
 :set viewdir?
 ```
 
 默认情况下会显示 `~/.vim/view`（根据您的操作系统，可能会有不同的路径。查阅 `:h viewdir` 获得更多信息）。在您的 vimrc 中添加下列内容，可以更改为不同路径：
 
-```
+```text
 set viewdir=$HOME/else/where
 ```
 
@@ -94,13 +94,13 @@ set viewdir=$HOME/else/where
 
 关闭并重新打开 `foo.txt`，您会看到原来的文本，没有任何改变。这是预期行为。运行下列命令可以加载视图文件：
 
-```
+```text
 :loadview
 ```
 
 现在您将看到：
 
-```
+```text
 +-- 5 lines: foo1 -----
 foo6
 foo7
@@ -117,31 +117,31 @@ Vim 允许您保存 9 个编号的视图（1-9）。
 
 假设您想用 `:9,10 fold` 来额外折叠最后两行，我们把这存为视图 1。运行：
 
-```
+```text
 :mkview 1
 ```
 
 如果您又想用 `:6,7 fold` 再折叠一次，并存为不同的视图，运行：
 
-```
+```text
 :mkview 2
 ```
 
 关闭并重新打开 `foo.txt` 文件，运行下列命令可以加载视图 1：
 
-```
+```text
 :loadview 1
 ```
 
 要加载视图 2，运行：
 
-```
+```text
 :loadview 2
 ```
 
 要加载原始视图，运行：
 
-```
+```text
 :loadview
 ```
 
@@ -149,13 +149,13 @@ Vim 允许您保存 9 个编号的视图（1-9）。
 
 有一件可能会发生的很倒霉的事情是，您花了很长时间在一个大文件中进行折叠，一不小心关闭了窗口，接着丢失了所有折叠信息。您可以在 vimrc 中添加下列内容，使得在关闭缓冲区后 Vim 能自动创建视图，防止此类灾难发生：
 
-```
+```text
 autocmd BufWinLeave *.txt mkview
 ```
 
 另外也能在打开缓冲区后自动加载视图：
 
-```
+```text
 autocmd BufWinEnter *.txt silent loadview
 ```
 
@@ -171,7 +171,7 @@ autocmd BufWinEnter *.txt silent loadview
 
 `foo.txt` 的内容：
 
-```
+```text
 foo1
 foo2
 foo3
@@ -186,7 +186,7 @@ foo10
 
 `bar.txt` 的内容：
 
-```
+```text
 bar1
 bar2
 bar3
@@ -201,7 +201,7 @@ bar10
 
 `baz.txt` 的内容：
 
-```
+```text
 baz1
 baz2
 baz3
@@ -216,11 +216,11 @@ baz10
 
 假设您的窗口布局如下所示（适当地使用 `split` 和 `vsplit` 来放置）：
 
-![Session Layout](images/session-layout.png)
+![Session Layout](.gitbook/assets/session-layout.png)
 
 要保留这个外观，您需要保存会话。运行：
 
-```
+```text
 :mksession
 ```
 
@@ -228,7 +228,7 @@ baz10
 
 如果您想将会话文件另存他处，可以将参数传递给 `mksession`：
 
-```
+```text
 :mksession ~/some/where/else.vim
 ```
 
@@ -238,13 +238,13 @@ baz10
 
 运行下列命令可以加载会话：
 
-```
+```text
 :source Session.vim
 ```
 
 现在 Vim 看起来就像您离开它时的样子！或者，您也可以从终端加载会话文件：
 
-```
+```text
 vim -S Session.vim
 ```
 
@@ -252,40 +252,40 @@ vim -S Session.vim
 
 您可以配置会话要保存的属性。若要查看当前哪些属性正被保存，请运行：
 
-```
+```text
 :set sessionoptions?
 ```
 
 我的显示：
 
-```
+```text
 blank,buffers,curdir,folds,help,tabpages,winsize,terminal
 ```
 
 如果在保存会话时不想存储 `terminal`，可以运行下列命令将其从会话选项中删除：
 
-```
+```text
 :set sessionoptions-=terminal
 ```
 
 如果要在保存会话时存储 `options`，请运行：
 
-```
+```text
 :set sessionoptions+=options
 ```
 
 下面是一些 `sessionoptions` 可以存储的属性：
 
-- `blank` 存储空窗口
-- `buffers` 存储缓冲区
-- `folds` 存储折叠
-- `globals` 存储全局变量（必须以大写字母开头，并且至少包含一个小写字母）
-- `options` 存储选项和映射
-- `resize` 存储窗口行列
-- `winpos` 存储窗口位置
-- `winsize` 存储窗口大小
-- `tabpages` 存储选项卡
-- `unix` 以 Unix 格式存储文件
+* `blank` 存储空窗口
+* `buffers` 存储缓冲区
+* `folds` 存储折叠
+* `globals` 存储全局变量（必须以大写字母开头，并且至少包含一个小写字母）
+* `options` 存储选项和映射
+* `resize` 存储窗口行列
+* `winpos` 存储窗口位置
+* `winsize` 存储窗口大小
+* `tabpages` 存储选项卡
+* `unix` 以 Unix 格式存储文件
 
 查阅 `:h 'sessionoptions'` 来获取完整列表。
 
@@ -301,15 +301,15 @@ blank,buffers,curdir,folds,help,tabpages,winsize,terminal
 
 要使用 Viminfo，您必须启用了 `+viminfo` 特性（`:version`）。Viminfo 存储着：
 
-- 命令行历史记录。
-- 字符串搜索历史记录。
-- 输入行历史记录。
-- 非空寄存器的内容。
-- 多个文件的标记。
-- 文件标记，它指向文件中的位置。
-- 上次搜索 / 替换模式（用于 “n” 和 “&”）。
-- 缓冲区列表。
-- 全局变量。
+* 命令行历史记录。
+* 字符串搜索历史记录。
+* 输入行历史记录。
+* 非空寄存器的内容。
+* 多个文件的标记。
+* 文件标记，它指向文件中的位置。
+* 上次搜索 / 替换模式（用于 “n” 和 “&”）。
+* 缓冲区列表。
+* 全局变量。
 
 通常，会话存储“外部”属性，Viminfo 存储“内部”属性。
 
@@ -317,37 +317,37 @@ blank,buffers,curdir,folds,help,tabpages,winsize,terminal
 
 对于 Unix，Viminfo 的默认位置是 `$HOME/.viminfo`（`~/.viminfo`）。根据您的操作系统，Viminfo 位置可能会有所不同。可以查阅 `:h viminfo-file-name`。每一次您做出的“内部”更改，如将文本复制进一个寄存器，Vim 都会自动更新 Viminfo 文件。
 
-*请确保您设置了 `nocompatible` 选项（`set nocompatible`），否则您的 Viminfo 将不起作用。*
+_请确保您设置了 `nocompatible` 选项（`set nocompatible`），否则您的 Viminfo 将不起作用。_
 
 ### 读写 Viminfo
 
 尽管只使用一个 Viminfo 文件，但您还是可以创建多个 Viminfo 文件。使用 `:wviminfo` 命令（缩写为 `:wv`）来创建多个 Viminfo 文件。
 
-```
+```text
 :wv ~/.viminfo_extra
 ```
 
 要覆盖现有的 Viminfo 文件，向 `wv` 命令多添加一个叹号：
 
-```
+```text
 :wv! ~/.viminfo_extra
 ```
 
 Vim 默认情况下会读取 `~/.viminfo` 文件。运行 `:rviminfo`（缩写为 `:rv`）可以读取不同的 Vimfile 文件：
 
-```
+```text
 :rv ~/.viminfo_extra
 ```
 
 要在终端使用不同的 Viminfo 文件来启动 Vim，请使用 “i” 标志：
 
-```
+```text
 vim -i viminfo_extra
 ```
 
 如果您要将 Vim 用于不同的任务，比如写代码和写作，您可以创建两个 Viminfo，一个针对写作优化，另一个为写代码优化。
 
-```
+```text
 vim -i viminfo_writing
 
 vim -i viminfo_coding
@@ -357,13 +357,13 @@ vim -i viminfo_coding
 
 要不使用 Viminfo 启动 Vim，可以在终端运行：
 
-```
+```text
 vim -i NONE
 ```
 
 要永不使用 Viminfo，可以在您的 vimrc 文件添加：
 
-```
+```text
 set viminfo="NONE"
 ```
 
@@ -371,22 +371,23 @@ set viminfo="NONE"
 
 和 `viewoptions` 以及 `sessionoptions` 类似，您可以用 `viminfo` 选项指定要存储的属性。请运行：
 
-```
+```text
 :set viminfo?
 ```
 
 您会得到：
 
-```
+```text
 !,'100,<50,s10,h
 ```
 
 看起来有点晦涩难懂。命令分解如下：
-- `!` 保存以大写字母开头、却不包含小写字母的全局变量。回想一下 `g:` 代表了一个全局变量。例如，假设您写了赋值语句 `let g:FOO = "foo"`，Viminfo 将存储全局变量 `FOO`。然而如果您写了 `let g:Foo = "foo"`，Viminfo 将不存储它，因为它包含了小写字母。没有 `!`，Vim 不会存储这些全局变量。
-- `'100` 代表标记。在这个例子中，Viminfo 将保存最近 100 个文件的本地标记（a-z）。注意，如果存储的文件过多，Vim 会变得很慢，1000 左右就可以了。
-- `<50` 告诉 Viminfo 每个寄存器最多保存多少行（这个例子中是 50 行）。如果我复制 100 行文本进寄存器 a（`"ay99j`）后关闭 Vim，下次打开 Vim 并从寄存器 a（`"ap`）粘贴时，Vim 最多只粘贴 50 行；如果不指定最大行号，*所有*行都将被保存；如果指定 0，什么都不保存了。
-- `s10` 为寄存器设置大小限制（kb）。在这个例子中，任何大于 10kb 的寄存器都会被排除。
-- `h` 禁用高亮显示（`hlsearch` 时）。
+
+* `!` 保存以大写字母开头、却不包含小写字母的全局变量。回想一下 `g:` 代表了一个全局变量。例如，假设您写了赋值语句 `let g:FOO = "foo"`，Viminfo 将存储全局变量 `FOO`。然而如果您写了 `let g:Foo = "foo"`，Viminfo 将不存储它，因为它包含了小写字母。没有 `!`，Vim 不会存储这些全局变量。
+* `'100` 代表标记。在这个例子中，Viminfo 将保存最近 100 个文件的本地标记（a-z）。注意，如果存储的文件过多，Vim 会变得很慢，1000 左右就可以了。
+* `<50` 告诉 Viminfo 每个寄存器最多保存多少行（这个例子中是 50 行）。如果我复制 100 行文本进寄存器 a（`"ay99j`）后关闭 Vim，下次打开 Vim 并从寄存器 a（`"ap`）粘贴时，Vim 最多只粘贴 50 行；如果不指定最大行号，_所有_行都将被保存；如果指定 0，什么都不保存了。
+* `s10` 为寄存器设置大小限制（kb）。在这个例子中，任何大于 10kb 的寄存器都会被排除。
+* `h` 禁用高亮显示（`hlsearch` 时）。
 
 可以查阅 `:h 'viminfo'` 来了解其他更多选项。
 
@@ -395,3 +396,4 @@ set viminfo="NONE"
 Vim 能使用视图、会话和 Viminfo 来保存不同级别的 Vim 环境快照。对于微型项目，可以使用视图；对于大型项目，可以使用会话。您应该花些时间来查阅视图、会话和 Viminfo 提供的所有选项。
 
 为您的编辑风格创建属于您自己的视图、会话和 Viminfo。如果您要换台计算机使用 Vim，只需加载您的设置，立刻就会感到宾至如归！
+
