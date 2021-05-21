@@ -4,6 +4,8 @@
 
 [英文版本](https://github.com/iggredible/Learn-Vim)
 
+## [在线阅读](https://yyrise.gitbook.io/learn-vim-zh)
+
 ### 这是什么?
 
 _学习 Vim（智能方式）_ 是一本优秀的学习 Vim 知识的书。
